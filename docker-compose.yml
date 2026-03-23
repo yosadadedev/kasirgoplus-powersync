@@ -1,0 +1,36 @@
+services:
+  powersync:
+    image: journeyapps/powersync-service:latest
+    restart: unless-stopped
+    depends_on:
+      mongo-rs-init:
+        condition: service_completed_successfully
+    command: ["start", "-r", "unified"]
+    volumes:
+      - ./service.yaml:/config/service.yaml
+      - ./sync-config.yaml:/config/sync-config.yaml
+    environment:
+      POWERSYNC_CONFIG_PATH: /config/service.yaml
+    ports:
+      - "8080:8080"
+
+  mongo:
+    image: mongo:7.0
+    command: --replSet rs0 --bind_ip_all --quiet
+    restart: unless-stopped
+    volumes:
+      - mongo_storage:/data/db
+
+  mongo-rs-init:
+    image: mongo:7.0
+    depends_on:
+      - mongo
+    restart: "no"
+    entrypoint:
+      - bash
+      - -c
+      - 'mongosh --host mongo:27017 --eval ''try{rs.status().ok && quit(0)} catch {} rs.initiate({_id: "rs0", version: 1, members: [{ _id: 0, host : "mongo:27017" }]})'''
+
+volumes:
+  mongo_storage:
+

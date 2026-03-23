@@ -1,0 +1,18 @@
+config:
+  edition: 3
+
+streams:
+  categories:
+    auto_subscribe: true
+    query: |
+      SELECT * FROM categories
+      WHERE tenant_id = auth.parameter('tenant_id')
+        AND deleted_at IS NULL
+
+  products:
+    auto_subscribe: true
+    query: |
+      SELECT * FROM products
+      WHERE tenant_id = auth.parameter('tenant_id')
+        AND deleted_at IS NULL
+
