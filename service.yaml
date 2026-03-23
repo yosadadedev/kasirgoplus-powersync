@@ -2,7 +2,6 @@ replication:
   connections:
     - type: postgresql
       uri: postgresql://powersync_repl:change_me@db-host:5432/kasirgoplus
-      sslmode: disable
 
 storage:
   type: mongodb
