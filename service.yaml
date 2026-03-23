@@ -20,7 +20,7 @@ client_auth:
       - kty: oct
         alg: 'HS256'
         kid: 'kasirgo-hs256'
-        k: 'replace_me_base64url'
+        k: '<BASE64URL_DARI_JWT_SECRET_BACKEND>'
 
 system:
   logging:
