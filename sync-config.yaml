@@ -22,7 +22,6 @@ streams:
       SELECT * FROM transactions
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
-        AND timestamp >= now() - interval '90 days'
 
   expenses:
     auto_subscribe: true
@@ -30,7 +29,6 @@ streams:
       SELECT * FROM expenses
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
-        AND date >= now() - interval '90 days'
 
   customers:
     auto_subscribe: true
