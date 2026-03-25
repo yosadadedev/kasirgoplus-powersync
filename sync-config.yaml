@@ -31,3 +31,10 @@ streams:
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
         AND date >= now() - interval '90 days'
+
+  customers:
+    auto_subscribe: true
+    query: |
+      SELECT * FROM customers
+      WHERE tenant_id = auth.parameter('tenant_id')
+        AND deleted_at IS NULL
