@@ -36,3 +36,10 @@ streams:
       SELECT * FROM customers
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
+
+  settings:
+    auto_subscribe: true
+    query: |
+      SELECT * FROM settings
+      WHERE tenant_id = auth.parameter('tenant_id')
+        AND deleted_at IS NULL
