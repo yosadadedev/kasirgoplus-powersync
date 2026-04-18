@@ -43,10 +43,3 @@ streams:
       SELECT * FROM discounts
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
-
-  printer_settings:
-    auto_subscribe: true
-    query: |
-      SELECT * FROM printer_settings
-      WHERE tenant_id = auth.parameter('tenant_id')
-        AND deleted_at IS NULL
