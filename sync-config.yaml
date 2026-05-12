@@ -22,10 +22,6 @@ streams:
       SELECT * FROM transactions
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
-        AND (
-          substr(timestamp, 1, 10) IN (SELECT value FROM json_each(auth.parameter('retention_days')))
-          OR substr(updated_at, 1, 10) IN (SELECT value FROM json_each(auth.parameter('retention_days')))
-        )
 
   expenses:
     auto_subscribe: true
@@ -33,10 +29,6 @@ streams:
       SELECT * FROM expenses
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
-        AND (
-          substr(date, 1, 10) IN (SELECT value FROM json_each(auth.parameter('retention_days')))
-          OR substr(updated_at, 1, 10) IN (SELECT value FROM json_each(auth.parameter('retention_days')))
-        )
 
   customers:
     auto_subscribe: true
