@@ -23,8 +23,8 @@ streams:
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
         AND (
-          timestamp >= auth.parameter('retention_since')
-          OR updated_at >= auth.parameter('retention_since')
+          substr(timestamp, 1, 10) IN (SELECT value FROM json_each(auth.parameter('retention_days')))
+          OR substr(updated_at, 1, 10) IN (SELECT value FROM json_each(auth.parameter('retention_days')))
         )
 
   expenses:
@@ -34,8 +34,8 @@ streams:
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
         AND (
-          date >= auth.parameter('retention_since')
-          OR updated_at >= auth.parameter('retention_since')
+          substr(date, 1, 10) IN (SELECT value FROM json_each(auth.parameter('retention_days')))
+          OR substr(updated_at, 1, 10) IN (SELECT value FROM json_each(auth.parameter('retention_days')))
         )
 
   customers:
