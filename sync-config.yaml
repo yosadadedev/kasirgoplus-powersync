@@ -23,8 +23,8 @@ streams:
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
         AND (
-          timestamp >= now() - interval '30 days'
-          OR updated_at >= now() - interval '30 days'
+          timestamp >= auth.parameter('retention_since')
+          OR updated_at >= auth.parameter('retention_since')
         )
 
   expenses:
@@ -34,8 +34,8 @@ streams:
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
         AND (
-          date >= now() - interval '30 days'
-          OR updated_at >= now() - interval '30 days'
+          date >= auth.parameter('retention_since')
+          OR updated_at >= auth.parameter('retention_since')
         )
 
   customers:
