@@ -21,12 +21,14 @@ streams:
     query: |
       SELECT * FROM transactions
       WHERE tenant_id = auth.parameter('tenant_id')
+        AND sync_recent_mobile = true
 
   expenses:
     auto_subscribe: true
     query: |
       SELECT * FROM expenses
       WHERE tenant_id = auth.parameter('tenant_id')
+        AND sync_recent_mobile = true
         AND deleted_at IS NULL
 
   customers:
