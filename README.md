@@ -37,7 +37,8 @@ CREATE PUBLICATION powersync FOR TABLE
   customers,
   discounts,
   business_settings,
-  printer_settings;
+  printer_settings,
+  stock_movements;
 ```
 
 ---
@@ -95,6 +96,7 @@ Sync config ada di `sync-config.yaml` (edition: 3) untuk:
 - discounts (tenant-scoped)
 - business_settings (tenant-scoped)
 - printer_settings (tenant-scoped)
+- stock_movements (tenant-scoped)
 
 ---
 
@@ -168,7 +170,8 @@ CREATE PUBLICATION powersync FOR TABLE
   customers,
   discounts,
   business_settings,
-  printer_settings;
+  printer_settings,
+  stock_movements;
 "
 ```
 

@@ -43,3 +43,10 @@ streams:
       SELECT * FROM discounts
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
+
+  stock_movements:
+    auto_subscribe: true
+    query: |
+      SELECT * FROM stock_movements
+      WHERE tenant_id = auth.parameter('tenant_id')
+        AND deleted_at IS NULL
