@@ -1,9 +1,12 @@
 config:
   edition: 3
 
+# Master data needed by the POS screen syncs first (priority 1) so it shows up
+# before the large history tables (default priority 3) finish downloading.
 streams:
   categories:
     auto_subscribe: true
+    priority: 1
     query: |
       SELECT * FROM categories
       WHERE tenant_id = auth.parameter('tenant_id')
@@ -11,6 +14,7 @@ streams:
 
   products:
     auto_subscribe: true
+    priority: 1
     query: |
       SELECT * FROM products
       WHERE tenant_id = auth.parameter('tenant_id')
@@ -32,6 +36,7 @@ streams:
 
   customers:
     auto_subscribe: true
+    priority: 1
     query: |
       SELECT * FROM customers
       WHERE tenant_id = auth.parameter('tenant_id')
@@ -39,6 +44,7 @@ streams:
 
   discounts:
     auto_subscribe: true
+    priority: 1
     query: |
       SELECT * FROM discounts
       WHERE tenant_id = auth.parameter('tenant_id')
