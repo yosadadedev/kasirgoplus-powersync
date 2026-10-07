@@ -20,12 +20,16 @@ streams:
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
 
+  # sync_recent_mobile = last 7 days (+ unpaid kasbon for transactions), maintained by a
+  # DB trigger and an hourly refresh in the backend (migration 020). Older history is
+  # read from the backend API by the app.
   transactions:
     auto_subscribe: true
     query: |
       SELECT * FROM transactions
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
+        AND sync_recent_mobile = true
 
   expenses:
     auto_subscribe: true
@@ -33,6 +37,7 @@ streams:
       SELECT * FROM expenses
       WHERE tenant_id = auth.parameter('tenant_id')
         AND deleted_at IS NULL
+        AND sync_recent_mobile = true
 
   customers:
     auto_subscribe: true
